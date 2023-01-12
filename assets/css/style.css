@@ -1,0 +1,15 @@
+* {
+    font-family: 'Press Start 2P', cursive;
+    color: #a2ca2c;
+    /* background-color: black; */
+}
+
+.col > h1 {
+    margin-top: 1.05em;
+    margin-left: .5em;
+}
+
+.col > p {
+    margin-top: 3em;
+    margin-left: -6em;
+}
