@@ -4,6 +4,10 @@
     /* background-color: black; */
 }
 
+body{background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;}
+
 .col > h1 {
     margin-top: 1.05em;
     margin-left: .5em;
