@@ -2,6 +2,16 @@ var userInput = document.getElementById("userInput");
 var searchButton = document.getElementById("searchButton")
 
 
+//loads background on page open
+window.addEventListener("load", function (){
+    fetch(
+      "https://api.nasa.gov/planetary/apod?api_key=NhPFpaLICBNtgWJTI0edILu5U5CcPKT8T4Fd2w2l" )
+      .then((response) => response.json())
+      .then((data) => {
+        document.body.style.backgroundImage = `url("${data.url}")`;
+        })
+})
+
 //fetch for planet and Stars
 // https://api-ninjas.com/api/planets for document regarding fetching data
 var planetUrl= "https://api.api-ninjas.com/v1/planets?name=" + userInput.value;
