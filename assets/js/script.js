@@ -1,6 +1,7 @@
 var userInput = document.getElementById("userInput");
-var searchButton = document.getElementById("searchButton")
-
+var searchButton = document.getElementById("searchButton");
+var starCheck = document.getElementById("starCheck");
+var planetCheck = document.getElementById("planetCheck");
 
 //loads background on page open
 window.addEventListener("load", function (){
@@ -28,8 +29,13 @@ function createUrl () {
   requestUrl = 'https://images-api.nasa.gov/search?q=' + userInput.value + '&media_type=image';
 }
 
+planetCheck.addEventListener("click", function(){
+    console.log(planetCheck.value)
+})
 
-
+starCheck.addEventListener("click", function(){
+    console.log(starCheck.value)
+})
 
 function fetchStar(){
   fetch(starUrl, {
