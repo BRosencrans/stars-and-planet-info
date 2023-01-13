@@ -3,7 +3,9 @@ var searchButton = document.getElementById("searchButton");
 var starCheck = document.getElementById("starCheck");
 var planetCheck = document.getElementById("planetCheck");
 var infoSection = document.getElementById("infoSection");
-
+var image1Section=document.getElementById("image1");
+var image2Section= document.getElementById("image2");
+var image3Section= document.getElementById("image3");
 
 //loads background on page open
 window.addEventListener("load", function (){
@@ -17,19 +19,15 @@ window.addEventListener("load", function (){
 
 //fetch for planet and Stars
 // // https://api-ninjas.com/api/planets for document regarding fetching data
-// var planetUrl= "https://api.api-ninjas.com/v1/planets?name=" + userInput.value;
+
 // //https://api-ninjas.com/api/stars for document regarding fetching data
-// var starUrl = "https://api.api-ninjas.com/v1/stars?name=" + userInput.value;
 
-// var requestUrl = 'https://images-api.nasa.gov/search?q=' + userInput.value + '&media_type=image';
 
-// // searchButton.addEventListener("click", createUrl);
 
-// function createUrl () {
-//   planetUrl= "https://api.api-ninjas.com/v1/planets?name=" + userInput.value;
-//   starUrl = "https://api.api-ninjas.com/v1/stars?name=" + userInput.value;
-//   requestUrl = 'https://images-api.nasa.gov/search?q=' + userInput.value + '&media_type=image';
-// }
+
+
+
+
 
 planetCheck.addEventListener("click", function(){
     console.log(planetCheck.value)
@@ -100,7 +98,7 @@ function fetchPlanet(input){
     distanceLy.textContent="Distance in Light Years from Earth: "+ data[0].distance_light_year;
     mass.textContent="Total Mass of planet: " + data[0].mass;
     temperature.textContent="Temperature: " + data[0].temperature;
-    period.textContent="1 Earth year is " + data[0].period + " on " + data[0].name;
+    period.textContent= data[0].period + " " + data[0].name + " day is 1 yeah on earth ";
 
     infoSection.appendChild(namePlanet);
     infoSection.appendChild(distanceLy);
@@ -111,22 +109,45 @@ function fetchPlanet(input){
   }
 
 
-function fetchNasa(){
-  fetch(requestUrl)
+function fetchNasa(input){
+  var nasaUrl="https://images-api.nasa.gov/search?q="+ input + "&media_type=image";
+  fetch(nasaUrl)
   .then(function (response) {
          return response.json();
      })
       .then(function (data) {
          console.log(data);
+        image1Section.textContent="";
+        image2Section.textContent="";
+        image3Section.textContent="";
+        var image1 = document.createElement("img");
+        var image2 = document.createElement("img");
+        var image3 = document.createElement("img");
+
+        image1.setAttribute("src",data.collection.items[0].links[0].href);
+        image2.setAttribute("src",data.collection.items[1].links[0].href);
+        image3.setAttribute("src",data.collection.items[2].links[0].href);
+        image1Section.appendChild(image1);
+        image2Section.appendChild(image2);
+        image3Section.appendChild(image3);
+
+
      });
   }
 
 
+
+  // fetchNasa();
 // searchButton.addEventListener('click', fetchPlanet("mars"));
 
 
 searchButton.addEventListener("click", function() {
-  fetchPlanet(userInput.value);
+  if(planetCheck.value=="on"){
+    fetchPlanet(userInput.value);
+    fetchNasa(userInput.value);
+  }else if(starCheck.value=="on"){
+    fetchStar(userInput.value);
+  }
 })
 
 
@@ -149,3 +170,4 @@ var testUrl1= "https://api.api-ninjas.com/v1/planets?name=Mars"
       //   var elems = document.querySelectorAll("select");
       //   var instances = M.FormSelect.init(elems, options);
       // });
+
