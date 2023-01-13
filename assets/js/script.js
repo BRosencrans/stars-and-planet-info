@@ -6,6 +6,8 @@ var infoSection = document.getElementById("infoSection");
 var image1Section=document.getElementById("image1");
 var image2Section= document.getElementById("image2");
 var image3Section= document.getElementById("image3");
+var planetBool = true;
+var starBool = false;
 
 //loads background on page open
 window.addEventListener("load", function (){
@@ -22,30 +24,23 @@ window.addEventListener("load", function (){
 
 // //https://api-ninjas.com/api/stars for document regarding fetching data
 
-
-
-
-
-
-
-
+//
 planetCheck.addEventListener("click", function(){
-    if (this.click) {
-      planetCheck.value = true;
-      starCheck.value = false;
-    
-    } 
-})
-
-starCheck.addEventListener("click", function() {
-  if(this.click){
-    starCheck.value = true;
-    planetCheck.value = false;
- 
+  if (this.click) {
+    planetBool = true;
+    starBool = false;
   }
 })
 
+starCheck.addEventListener("click", function() {
+if(this.click){
+  starBool = true;
+  planetBool = false;
+}
+})
+
 function fetchStar(input){
+  infoSection.textContent="";
   starUrl = "https://api.api-ninjas.com/v1/stars?name=" + input;
   fetch(starUrl, {
     method: 'GET',
@@ -78,7 +73,6 @@ function fetchStar(input){
     });
 
   }
-
 
 function fetchPlanet(input){
   infoSection.textContent="";
@@ -116,7 +110,6 @@ function fetchPlanet(input){
   });
   }
 
-
 function fetchNasa(input){
   var nasaUrl="https://images-api.nasa.gov/search?q="+ input + "&media_type=image";
   fetch(nasaUrl)
@@ -144,16 +137,14 @@ function fetchNasa(input){
   }
 
 
-
-
-
 searchButton.addEventListener("click", function() {
-  if(planetCheck.value=true){
+  if(planetBool){
     console.log(planetCheck.value);
     fetchPlanet(userInput.value);
     fetchNasa(userInput.value);
-  }else if(starCheck.value=true){
+  }else if(starBool){
     fetchStar(userInput.value);
+    fetchNasa(userInput.value);
   }
 })
 
