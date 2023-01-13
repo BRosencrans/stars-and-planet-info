@@ -1,0 +1,27 @@
+* {
+    font-family: 'Press Start 2P', cursive;
+    color: #a2ca2c;
+    /* background-color: black; */
+}
+
+body{background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;}
+
+.col > h1 {
+    margin-top: 1.05em;
+    margin-left: 1em;
+}
+
+.info > p {
+    margin-top: 3em;
+    margin-left: -4em;
+}
+
+.input-field {
+    margin-top: -1.5em;;
+}
+
+.checkboxes {
+    margin-top: -1.1em;
+}
