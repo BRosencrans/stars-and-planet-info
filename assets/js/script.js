@@ -6,6 +6,8 @@ var infoSection = document.getElementById("infoSection");
 var image1Section=document.getElementById("image1");
 var image2Section= document.getElementById("image2");
 var image3Section= document.getElementById("image3");
+var planetBool = true;
+var starBool = false;
 
 //loads background on page open
 window.addEventListener("load", function (){
@@ -22,30 +24,25 @@ window.addEventListener("load", function (){
 
 // //https://api-ninjas.com/api/stars for document regarding fetching data
 
-
-
-
-
-
-
-
+//
 planetCheck.addEventListener("click", function(){
-    if (this.click) {
-      planetCheck.value = true;
-      starCheck.value = false;
-    } 
-})
-
-starCheck.addEventListener("click", function() {
-  if(this.click){
-    starCheck.value = true;
-    planetCheck.value = false;
+  if (this.click) {
+    planetBool = true;
+    starBool = false;
   }
 })
 
+starCheck.addEventListener("click", function() {
+if(this.click){
+  starBool = true;
+  planetBool = false;
+}
+})
+
 function fetchStar(input){
+  infoSection.textContent="";
   starUrl = "https://api.api-ninjas.com/v1/stars?name=" + input;
-  fetch(input, {
+  fetch(starUrl, {
     method: 'GET',
     headers: {
       "X-Api-Key": "zHz6WuU2dGG/x9UJduaV2A==XNhUxVpkiNv1mI2r",
@@ -76,7 +73,6 @@ function fetchStar(input){
     });
 
   }
-
 
 function fetchPlanet(input){
   infoSection.textContent="";
@@ -114,7 +110,6 @@ function fetchPlanet(input){
   });
   }
 
-
 function fetchNasa(input){
   var nasaUrl="https://images-api.nasa.gov/search?q="+ input + "&media_type=image";
   fetch(nasaUrl)
@@ -142,35 +137,22 @@ function fetchNasa(input){
   }
 
 
-
-  // fetchNasa();
-// searchButton.addEventListener('click', fetchPlanet("mars"));
-
-
 searchButton.addEventListener("click", function() {
-  if(planetCheck.value=="on"){
+  if(planetBool){
+    console.log(planetCheck.value);
     fetchPlanet(userInput.value);
     fetchNasa(userInput.value);
-  }else if(starCheck.value=="on"){
+  }else if(starBool){
     fetchStar(userInput.value);
+    fetchNasa(userInput.value);
   }
 })
 
 
-// function showValue(){
-//   console.log(userInput.value);
-// }
 
+// var testUrl= "https://api.api-ninjas.com/v1/stars?name=vega";
+// var testUrl1= "https://api.api-ninjas.com/v1/planets?name=Mars"
 
-
-
-
-
-
-var testUrl= "https://api.api-ninjas.com/v1/stars?name=vega";
-var testUrl1= "https://api.api-ninjas.com/v1/planets?name=Mars"
-  // fetchStar(testUrl);
-  // fetchPlanet(testUrl1);
 
       // document.addEventListener("DOMContentLoaded", function () {
       //   var elems = document.querySelectorAll("select");
