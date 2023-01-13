@@ -33,6 +33,7 @@ planetCheck.addEventListener("click", function(){
     if (this.click) {
       planetCheck.value = true;
       starCheck.value = false;
+    
     } 
 })
 
@@ -40,12 +41,13 @@ starCheck.addEventListener("click", function() {
   if(this.click){
     starCheck.value = true;
     planetCheck.value = false;
+ 
   }
 })
 
 function fetchStar(input){
   starUrl = "https://api.api-ninjas.com/v1/stars?name=" + input;
-  fetch(input, {
+  fetch(starUrl, {
     method: 'GET',
     headers: {
       "X-Api-Key": "zHz6WuU2dGG/x9UJduaV2A==XNhUxVpkiNv1mI2r",
@@ -143,34 +145,23 @@ function fetchNasa(input){
 
 
 
-  // fetchNasa();
-// searchButton.addEventListener('click', fetchPlanet("mars"));
 
 
 searchButton.addEventListener("click", function() {
-  if(planetCheck.value=="on"){
+  if(planetCheck.value=true){
+    console.log(planetCheck.value);
     fetchPlanet(userInput.value);
     fetchNasa(userInput.value);
-  }else if(starCheck.value=="on"){
+  }else if(starCheck.value=true){
     fetchStar(userInput.value);
   }
 })
 
 
-// function showValue(){
-//   console.log(userInput.value);
-// }
 
+// var testUrl= "https://api.api-ninjas.com/v1/stars?name=vega";
+// var testUrl1= "https://api.api-ninjas.com/v1/planets?name=Mars"
 
-
-
-
-
-
-var testUrl= "https://api.api-ninjas.com/v1/stars?name=vega";
-var testUrl1= "https://api.api-ninjas.com/v1/planets?name=Mars"
-  // fetchStar(testUrl);
-  // fetchPlanet(testUrl1);
 
       // document.addEventListener("DOMContentLoaded", function () {
       //   var elems = document.querySelectorAll("select");
