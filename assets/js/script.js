@@ -32,11 +32,17 @@ window.addEventListener("load", function (){
 // }
 
 planetCheck.addEventListener("click", function(){
-    console.log(planetCheck.value)
+    if (this.click) {
+      planetCheck.value = true;
+      starCheck.value = false;
+    } 
 })
 
-starCheck.addEventListener("click", function(){
-    console.log(starCheck.value)
+starCheck.addEventListener("click", function() {
+  if(this.click){
+    starCheck.value = true;
+    planetCheck.value = false;
+  }
 })
 
 function fetchStar(input){
