@@ -98,9 +98,9 @@ function fetchPlanet(input){
 
     namePlanet.textContent="Planet: "+data[0].name;
     distanceLy.textContent="Distance in Light Years from Earth: "+ data[0].distance_light_year;
-    mass.textContent="Total Mass of planet: " + data[0].mass;
-    temperature.textContent="Temperature: " + data[0].temperature;
-    period.textContent= data[0].period + " " + data[0].name + " day is 1 yeah on earth ";
+    mass.textContent="Total Mass of planet (ratio compared to Jupiter's mass): " + data[0].mass;
+    temperature.textContent="Temperature in Kelvin: " + data[0].temperature;
+    period.textContent= data[0].period + " " + data[0].name + " day(s) is 1 year on earth ";
 
     infoSection.appendChild(namePlanet);
     infoSection.appendChild(distanceLy);
