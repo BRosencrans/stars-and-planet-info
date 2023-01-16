@@ -95,7 +95,6 @@ function fetchPlanet(input){
     return response.json();
   })
   .then(function (data) {
-<<<<<<< HEAD
     if(data.length<=0){
       //if data returns back 0 then it will prompt user to try again.
       var message = document.createElement("h1");
@@ -124,26 +123,6 @@ function fetchPlanet(input){
       //calls function that creates the images.
       fetchNasa(input);
     }
-=======
-    console.log(data);
-    var namePlanet=document.createElement("h5");
-    var distanceLy= document.createElement("p");
-    var mass = document.createElement("p");
-    var temperature = document.createElement("p");
-    var period = document.createElement("p");
-
-    namePlanet.textContent="Planet: "+data[0].name;
-    distanceLy.textContent="Distance in Light Years from Earth: "+ data[0].distance_light_year;
-    mass.textContent="Total Mass of planet (ratio compared to Jupiter's mass): " + data[0].mass;
-    temperature.textContent="Temperature in Kelvin: " + data[0].temperature;
-    period.textContent= data[0].period + " " + data[0].name + " day(s) is 1 year on earth ";
-
-    infoSection.appendChild(namePlanet);
-    infoSection.appendChild(distanceLy);
-    infoSection.appendChild(mass);
-    infoSection.appendChild(temperature);
-    infoSection.appendChild(period);
->>>>>>> dev
   });
   }
 
