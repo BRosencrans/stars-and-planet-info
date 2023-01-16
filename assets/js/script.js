@@ -95,7 +95,9 @@ function fetchPlanet(input){
     return response.json();
   })
   .then(function (data) {
+
     //if data returns nothing, it will prompt user to try again.
+
     if(data.length<=0){
       var message = document.createElement("h1");
       message.textContent="No Search Results. Try Again!";
@@ -165,9 +167,4 @@ function clearDisplay(){
   infoSection.textContent="";
 }
 
-
-      // document.addEventListener("DOMContentLoaded", function () {
-      //   var elems = document.querySelectorAll("select");
-      //   var instances = M.FormSelect.init(elems, options);
-      // });
 
