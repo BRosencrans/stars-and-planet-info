@@ -19,12 +19,7 @@ window.addEventListener("load", function (){
         })
 })
 
-//fetch for planet and Stars
-// // https://api-ninjas.com/api/planets for document regarding fetching data
-
-// //https://api-ninjas.com/api/stars for document regarding fetching data
-
-//
+//Checks and uncheck the planet box and gives it a boolean value so js know which api to fetch
 planetCheck.addEventListener("click", function(){
   if (this.click) {
     planetBool = true;
@@ -32,6 +27,7 @@ planetCheck.addEventListener("click", function(){
   }
 })
 
+//Checks and uncheck the star box and gives it a boolean value so js know which api to fetch
 starCheck.addEventListener("click", function() {
 if(this.click){
   starBool = true;
@@ -39,8 +35,9 @@ if(this.click){
 }
 })
 
+//Function to fetch Data from Stars API
 function fetchStar(input){
-  infoSection.textContent="";
+  clearDisplay();
   starUrl = "https://api.api-ninjas.com/v1/stars?name=" + input;
   fetch(starUrl, {
     method: 'GET',
@@ -53,29 +50,39 @@ function fetchStar(input){
     return response.json();
     })
     .then(function (data) {
-      console.log(data);
-      var nameStar = document.createElement("h5");
-      var constellation = document.createElement("p");
-      var distanceLY = document.createElement("p");
-      var declination = document.createElement("p");
+      //if data returns nothing, it will prompt user to try again.
+      if(data.length <= 0){
+        var message = document.createElement("h1");
+        message.textContent="No Search Results. Try Again!";
+        infoSection.appendChild(message);
+        console.log("try Again")
+      }else{
+        //creates all elements
+        var nameStar = document.createElement("h5");
+        var constellation = document.createElement("p");
+        var distanceLY = document.createElement("p");
+        var declination = document.createElement("p");
+        //converts the data from api to text
+        nameStar.textContent="Star: " + data[0].name;
+        constellation.textContent ="constellation: " + data[0].constellation;
+        distanceLY.textContent= "Distance In Light Years: " + data[0].distance_light_year;
+        declination.textContent= "Declination: " + data[0].declination;
+        //appends to infosection
+        infoSection.appendChild(nameStar);
+        infoSection.appendChild(constellation);
+        infoSection.appendChild(distanceLY);
+        infoSection.appendChild(declination);
+        //calls function that creates the images.
+        fetchNasa(input);
 
-      nameStar.textContent="Star: " + data[0].name;
-      constellation.textContent ="constellation: " + data[0].constellation;
-      distanceLY.textContent= "Distance In Light Years: " + data[0].distance_light_year;
-      declination.textContent= "Declination: " + data[0].declination;
-
-      infoSection.appendChild(nameStar);
-      infoSection.appendChild(constellation);
-      infoSection.appendChild(distanceLY);
-      infoSection.appendChild(declination);
-
-
+      }
     });
 
   }
 
+//Fetches Planet API
 function fetchPlanet(input){
-  infoSection.textContent="";
+  clearDisplay();
   planetUrl= "https://api.api-ninjas.com/v1/planets?name=" + input;
   fetch(planetUrl, {
     method: 'GET',
@@ -87,29 +94,39 @@ function fetchPlanet(input){
   .then(function (response) {
     return response.json();
   })
-  
   .then(function (data) {
-    console.log(data);
-    var namePlanet=document.createElement("h5");
-    var distanceLy= document.createElement("p");
-    var mass = document.createElement("p");
-    var temperature = document.createElement("p");
-    var period = document.createElement("p");
-
-    namePlanet.textContent="Planet: "+data[0].name;
-    distanceLy.textContent="Distance in Light Years from Earth: "+ data[0].distance_light_year;
-    mass.textContent="Total Mass of planet: " + data[0].mass;
-    temperature.textContent="Temperature: " + data[0].temperature;
-    period.textContent= data[0].period + " " + data[0].name + " day is 1 yeah on earth ";
-
-    infoSection.appendChild(namePlanet);
-    infoSection.appendChild(distanceLy);
-    infoSection.appendChild(mass);
-    infoSection.appendChild(temperature);
-    infoSection.appendChild(period);
+    if(data.length<=0){
+      //if data returns back 0 then it will prompt user to try again.
+      var message = document.createElement("h1");
+      message.textContent="No Search Results. Try Again!";
+      infoSection.appendChild(message);
+      console.log("Try Again")
+    }else{
+      // Creates all Element.
+      var namePlanet=document.createElement("h5");
+      var distanceLy= document.createElement("p");
+      var mass = document.createElement("p");
+      var temperature = document.createElement("p");
+      var period = document.createElement("p");
+      // Converts data from api to text to display on page.
+      namePlanet.textContent="Planet: "+data[0].name;
+      distanceLy.textContent="Distance in Light Years from Earth: "+ data[0].distance_light_year;
+      mass.textContent="Total Mass of planet: " + data[0].mass;
+      temperature.textContent="Temperature: " + data[0].temperature;
+      period.textContent= data[0].period + " " + data[0].name + " day is 1 yeah on earth ";
+      // Appends it the infosection.
+      infoSection.appendChild(namePlanet);
+      infoSection.appendChild(distanceLy);
+      infoSection.appendChild(mass);
+      infoSection.appendChild(temperature);
+      infoSection.appendChild(period);
+      //calls function that creates the images.
+      fetchNasa(input);
+    }
   });
   }
 
+//add 3 images from the nasa database to the display
 function fetchNasa(input){
   var nasaUrl="https://images-api.nasa.gov/search?q="+ input + "&media_type=image";
   fetch(nasaUrl)
@@ -118,9 +135,6 @@ function fetchNasa(input){
      })
       .then(function (data) {
          console.log(data);
-        image1Section.textContent="";
-        image2Section.textContent="";
-        image3Section.textContent="";
         var image1 = document.createElement("img");
         var image2 = document.createElement("img");
         var image3 = document.createElement("img");
@@ -136,22 +150,22 @@ function fetchNasa(input){
      });
   }
 
-
+//Event listener for the search button. 
 searchButton.addEventListener("click", function() {
   if(planetBool){
-    console.log(planetCheck.value);
     fetchPlanet(userInput.value);
-    fetchNasa(userInput.value);
   }else if(starBool){
     fetchStar(userInput.value);
-    fetchNasa(userInput.value);
   }
 })
 
-
-
-// var testUrl= "https://api.api-ninjas.com/v1/stars?name=vega";
-// var testUrl1= "https://api.api-ninjas.com/v1/planets?name=Mars"
+// Clear display
+function clearDisplay(){
+  image1Section.textContent="";
+  image2Section.textContent="";
+  image3Section.textContent="";
+  infoSection.textContent="";
+}
 
 
       // document.addEventListener("DOMContentLoaded", function () {
