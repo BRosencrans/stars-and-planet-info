@@ -55,7 +55,7 @@ function fetchStar(input){
         var message = document.createElement("h1");
         message.textContent="No Search Results. Try Again!";
         infoSection.appendChild(message);
-        console.log("try Again")
+        
       }else{
         //creates all elements
         var nameStar = document.createElement("h5");
@@ -95,55 +95,32 @@ function fetchPlanet(input){
     return response.json();
   })
   .then(function (data) {
-<<<<<<< HEAD
+    //if data returns nothing, it will prompt user to try again.
     if(data.length<=0){
-      //if data returns back 0 then it will prompt user to try again.
       var message = document.createElement("h1");
       message.textContent="No Search Results. Try Again!";
       infoSection.appendChild(message);
-      console.log("Try Again")
     }else{
-      // Creates all Element.
+      //creates all element
       var namePlanet=document.createElement("h5");
       var distanceLy= document.createElement("p");
       var mass = document.createElement("p");
       var temperature = document.createElement("p");
       var period = document.createElement("p");
-      // Converts data from api to text to display on page.
+      //converts the data from api to text
       namePlanet.textContent="Planet: "+data[0].name;
       distanceLy.textContent="Distance in Light Years from Earth: "+ data[0].distance_light_year;
-      mass.textContent="Total Mass of planet: " + data[0].mass;
-      temperature.textContent="Temperature: " + data[0].temperature;
-      period.textContent= data[0].period + " " + data[0].name + " day is 1 yeah on earth ";
-      // Appends it the infosection.
+      mass.textContent="Total Mass of planet (ratio compared to Jupiter's mass): " + data[0].mass;
+      temperature.textContent="Temperature in Kelvin: " + data[0].temperature;
+      period.textContent= data[0].period + " " + data[0].name + " day(s) is 1 year on earth ";
+      //appends to infosection
       infoSection.appendChild(namePlanet);
       infoSection.appendChild(distanceLy);
       infoSection.appendChild(mass);
       infoSection.appendChild(temperature);
       infoSection.appendChild(period);
-      //calls function that creates the images.
       fetchNasa(input);
     }
-=======
-    console.log(data);
-    var namePlanet=document.createElement("h5");
-    var distanceLy= document.createElement("p");
-    var mass = document.createElement("p");
-    var temperature = document.createElement("p");
-    var period = document.createElement("p");
-
-    namePlanet.textContent="Planet: "+data[0].name;
-    distanceLy.textContent="Distance in Light Years from Earth: "+ data[0].distance_light_year;
-    mass.textContent="Total Mass of planet (ratio compared to Jupiter's mass): " + data[0].mass;
-    temperature.textContent="Temperature in Kelvin: " + data[0].temperature;
-    period.textContent= data[0].period + " " + data[0].name + " day(s) is 1 year on earth ";
-
-    infoSection.appendChild(namePlanet);
-    infoSection.appendChild(distanceLy);
-    infoSection.appendChild(mass);
-    infoSection.appendChild(temperature);
-    infoSection.appendChild(period);
->>>>>>> dev
   });
   }
 
