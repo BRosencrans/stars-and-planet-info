@@ -11,8 +11,7 @@ it's super simple to use our web app, all you need to do is pick either planets 
 [Nova](https://brosencrans.github.io/stars-and-planet-info/)
 
 ## Demo
-![Search Demo](https://raw.githubusercontent.com/BRosencrans/stars-and-planet-info/blob/dev/assets/Screenshots-demos/demos/search-demo.gif)
-
+![Search Demo]
 
 ## Screenshots
 ![Planet](https://raw.githubusercontent.com/BRosencrans/stars-and-planet-info/dev/assets/Screenshots-demos/screenshots/planet-screen%20shot.png)
