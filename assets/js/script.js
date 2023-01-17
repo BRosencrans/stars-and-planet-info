@@ -127,26 +127,26 @@ function fetchPlanet(input){
   }
 
 //add 3 images from the nasa database to the display
-function fetchNasa(input){
-  var nasaUrl="https://images-api.nasa.gov/search?q="+ input + "&media_type=image";
-  fetch(nasaUrl)
+async function fetchNasa(input) {
+  let results;
+  let baseNasaUrl = "https://images-api.nasa.gov/search?q=" + input + "&media_type=image"
+
+  await fetch(baseNasaUrl + "&keywords=planet")
   .then(function (response) {
          return response.json();
      })
       .then(function (data) {
-         console.log(data);
-        var image1 = document.createElement("img");
-        var image2 = document.createElement("img");
-        var image3 = document.createElement("img");
-
-        image1.setAttribute("src",data.collection.items[0].links[0].href);
-        image2.setAttribute("src",data.collection.items[1].links[0].href);
-        image3.setAttribute("src",data.collection.items[2].links[0].href);
-        image1Section.appendChild(image1);
-        image2Section.appendChild(image2);
-        image3Section.appendChild(image3);
+      results = data.collection.items
+    });
 
 
+  if (results.length < 3) {
+    fetch(baseNasaUrl)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        results = data.collection.items
      });
   }
   image1Section.textContent = "";
