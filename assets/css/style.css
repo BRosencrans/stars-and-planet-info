@@ -37,3 +37,7 @@ img {
     margin-top: -1.1em;
 }
 
+img:hover{
+    cursor: pointer;
+    transform: scale(1.50);
+}

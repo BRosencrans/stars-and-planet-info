@@ -131,7 +131,7 @@ async function fetchNasa(input) {
   let results;
   let baseNasaUrl = "https://images-api.nasa.gov/search?q=" + input + "&media_type=image"
 
-  await fetch(baseNasaUrl + "&keywords=planet")
+  await fetch(baseNasaUrl + "&keywords=view")
   .then(function (response) {
          return response.json();
      })
@@ -149,9 +149,6 @@ async function fetchNasa(input) {
         results = data.collection.items
      });
   }
-  image1Section.textContent = "";
-  image2Section.textContent = "";
-  image3Section.textContent = "";
   var image1 = document.createElement("img");
   var image2 = document.createElement("img");
   var image3 = document.createElement("img");
