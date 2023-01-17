@@ -19,15 +19,15 @@ it's super simple to use our web app, all you need to do is pick either planets 
 
 
 ## Credits 
-Contributors
-[Binh Ngo](https://github.com/binhsta)
-[Devin Rocha](https://github.com/devroch31)
-[Howard Lee](https://github.com/HowardLee2022)
+Contributors:
+[Binh Ngo](https://github.com/binhsta),
+[Devin Rocha](https://github.com/devroch31),
+[Howard Lee](https://github.com/HowardLee2022),
 [Brandon Rosencrans](https://github.com/BRosencrans)
 
-Website Design
+Website Design:
 [Materialize](https://materializecss.com/)
 
-API's used
-[NASA API](https://api.nasa.gov/) used for both the background and pictures generated
+API's used:
+[NASA API](https://api.nasa.gov/) used for both the background and pictures generated and
 [API Ninja](https://api-ninjas.com/) used for the information generated on planets and stars
