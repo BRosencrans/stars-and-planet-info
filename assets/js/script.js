@@ -141,7 +141,7 @@ async function fetchNasa(input) {
 
 
   if (results.length < 3) {
-    fetch(baseNasaUrl)
+    await fetch(baseNasaUrl)
       .then(function (response) {
         return response.json();
       })
