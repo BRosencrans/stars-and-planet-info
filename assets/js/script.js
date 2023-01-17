@@ -10,13 +10,13 @@ var planetBool = true;
 var starBool = false;
 
 //loads background on page open
-window.addEventListener("load", function (){
-    fetch(
-      "https://api.nasa.gov/planetary/apod?api_key=NhPFpaLICBNtgWJTI0edILu5U5CcPKT8T4Fd2w2l" )
-      .then((response) => response.json())
-      .then((data) => {
-        document.body.style.backgroundImage = `url("${data.url}")`;
-        })
+window.addEventListener("load", function () {
+  fetch(
+    "https://api.nasa.gov/planetary/apod?api_key=NhPFpaLICBNtgWJTI0edILu5U5CcPKT8T4Fd2w2l")
+    .then((response) => response.json())
+    .then((data) => {
+      document.body.style.backgroundImage = `url("${data.url}")`;
+    })
 })
 
 //Checks and uncheck the planet box and gives it a boolean value so js know which api to fetch
@@ -46,8 +46,8 @@ function fetchStar(input){
       'Content-Type': "application/json",
     },
   })
-  .then(function (response) {
-    return response.json();
+    .then(function (response) {
+      return response.json();
     })
     .then(function (data) {
       //if data returns nothing, it will prompt user to try again.
@@ -78,7 +78,7 @@ function fetchStar(input){
       }
     });
 
-  }
+}
 
 //Fetches Planet API
 function fetchPlanet(input){
@@ -127,28 +127,42 @@ function fetchPlanet(input){
   }
 
 //add 3 images from the nasa database to the display
-function fetchNasa(input){
-  var nasaUrl="https://images-api.nasa.gov/search?q="+ input + "&media_type=image";
-  fetch(nasaUrl)
+async function fetchNasa(input) {
+  let results;
+  let baseNasaUrl = "https://images-api.nasa.gov/search?q=" + input + "&media_type=image"
+
+  await fetch(baseNasaUrl + "&keywords=planet")
   .then(function (response) {
          return response.json();
      })
       .then(function (data) {
-         console.log(data);
-        var image1 = document.createElement("img");
-        var image2 = document.createElement("img");
-        var image3 = document.createElement("img");
-
-        image1.setAttribute("src",data.collection.items[0].links[0].href);
-        image2.setAttribute("src",data.collection.items[1].links[0].href);
-        image3.setAttribute("src",data.collection.items[2].links[0].href);
-        image1Section.appendChild(image1);
-        image2Section.appendChild(image2);
-        image3Section.appendChild(image3);
+      results = data.collection.items
+    });
 
 
+  if (results.length < 3) {
+    await fetch(baseNasaUrl)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        results = data.collection.items
      });
   }
+  image1Section.textContent = "";
+  image2Section.textContent = "";
+  image3Section.textContent = "";
+  var image1 = document.createElement("img");
+  var image2 = document.createElement("img");
+  var image3 = document.createElement("img");
+
+  image1.setAttribute("src", results[0].links[0].href);
+  image2.setAttribute("src", results[1].links[0].href);
+  image3.setAttribute("src", results[2].links[0].href);
+  image1Section.appendChild(image1);
+  image2Section.appendChild(image2);
+  image3Section.appendChild(image3);
+}
 
 //Event listener for the search button. 
 searchButton.addEventListener("click", function() {
